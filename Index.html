@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music Player</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(to bottom, #d3d3d3, #696969);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    #albumArt {
+      width: 300px;
+      height: 300px;
+    }
+
+    #controls {
+      display: flex;
+    }
+
+    button {
+      background-color: grey;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: grey;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <audio id="player" controls loop>
+    <source src="01 - Princess.mp3" type="audio/mpeg">
+  </audio>
+
+  <img id="albumArt" src="albumArt1.jpg">
+
+  <span id="songTitle"></span>
+
+  <div id="controls">
+    <button onclick="playPause()">Play/Pause</button>
+    <button onclick="previousSong()">Previous</button>
+    <button onclick="nextSong()">Next</button>
+  </div>
+
+  <script>
+    var player = document.getElementById("player");
+    var albumArtImg = document.getElementById("albumArt");
+    var songTitle = document.getElementById("songTitle");
+
+    var songs = ["01 - Princess.mp3", "02 - Sundial Dreams - Kevin Kern.mp3", "03 - Hungarian Dance No.5 in F-sharp minor.mp3", "04 - Rondo ala turca.mp3", "05 - Humoresque.mp3", "06 - Fur Elise.mp3", "07 - Minuet in G Major.mp3", "08 - Turkish March.mp3", "09 - Impromptu in E-flat Major.mp3", "10 - Caprice 24.mp3", "11 - Caravansary.mp3", "12 - Nightingale.mp3", "13 - Romance.mp3", "14 - Salut D'Amour.mp3", "15 - Sheperd Moons.mp3", "16 - Standchen.mp3", "18 - The Enchanted Garden - Kevin Kern.mp3", "19 - Secret Garden - Dreamcatcher - 12 - Heartstrings.mp3"];
+    var songTitles = ["01 - Princess", "02 - Sundial Dreams - Kevin Kern", "03 - Hungarian Dance No.5 in F-sharp minor", "04 - Rondo ala turca", "05 - Humoresque", "06 - Fur Elise", "07 - Minuet in G ", "08 - Turkish March", "09 - Impromptu in E-flat Major", "10 - Caprice 24", "11 - Caravansary", "12 - Nightingale", "13 - Romance", "14 - Salut D'Amour", "15 - Sheperd Moons", "16 - Standchen", "18 - The Enchanted Garden - Kevin Kern", "19 - Secret Garden - Dreamcatcher - 12 - Heartstrings"];
+    var albumArt = ["Princess.jpg", "Sundial dreams.jpg", "Hungarian dance.jpg"];
+
+    var currentSong = 0;
+    var repeat = false;
+
+    songTitle.textContent = songTitles[currentSong];
+    albumArtImg.src = albumArt[currentSong];
+
+    function playPause() {
+      if (player.paused) {
+        player.play();
+      } else {
+        player.pause();
+      }
+    }
+
+    function nextSong() {
+      if (!repeat) {
+        currentSong++;
+        if (currentSong >= songs.length) {
+          currentSong = 0;
+        }
+      }
+      player.src = songs[currentSong];
+      songTitle.textContent = songTitles[currentSong];
+      albumArtImg.src = albumArt[currentSong];
+      player.play();
+    }
+
+    function previousSong() {
+      if (!repeat) {
+        currentSong--;
+        if (currentSong < 0) {
+          currentSong = songs.length - 1;
+        }
+      }
+      player.src = songs[currentSong];
+      songTitle.textContent = songTitles[currentSong];
+      albumArtImg.src = albumArt[currentSong];
+      player.play();
+    }
+
+  </script>
+</body>
+</html>
