@@ -1,0 +1,1 @@
+A simple music playlist. you can modify it in your own choice as long as you have the mp3 files. This music playlist if full of classical music. You can add your your own music, album cover and name on this section of javascript: "var song, varsongTitles, var albumArt"
